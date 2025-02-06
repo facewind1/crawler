@@ -2,20 +2,15 @@ import re
 import time
 import requests
 import concurrent.futures
+import argparse
 from bs4 import BeautifulSoup
 from get_urls import get_urls, title_author
 from chinese2arabic import chinese2arabic
 from create_epub import create_epub
 
 # 初始信息
-url = "https://ghxs.net/21093/"
 txt_folder = "./小说"
 chapters_url_folder = "./chapters.csv"
-
-# title = "大明：开局请朱元璋退位"
-# author = "姜阿山小树"
-title, author = title_author(url)
-print(title, author)
 
 def content_extract(chapter_url):
     try:
@@ -56,8 +51,17 @@ def process_chapter(chapter_url, chapters_url_dict, txt_folder):
     time.sleep(0.5)  # 避免对服务器压力过大
 
 if __name__ == "__main__":
+    # 接受位置参数输入
+    parser = argparse.ArgumentParser()
+    parser.add_argument('param1', type=str, help='第一个参数')
+    args = parser.parse_args()
+    url = args.param1
+    # 小说名字和作者
+    title, author = title_author(url)
+    print(title, author)
+
     chapters_url_dict = get_urls(url, chapters_url_folder)
-    max_workers = 4
+    max_workers = 10
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = [
             executor.submit(process_chapter, chapter_url, chapters_url_dict, txt_folder)
