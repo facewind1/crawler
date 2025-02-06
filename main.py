@@ -1,4 +1,5 @@
 import re
+import os
 import time
 import requests
 import concurrent.futures
@@ -9,7 +10,6 @@ from chinese2arabic import chinese2arabic
 from create_epub import create_epub
 
 # 初始信息
-txt_folder = "./小说"
 chapters_url_folder = "./chapters.csv"
 
 def content_extract(chapter_url):
@@ -59,6 +59,13 @@ if __name__ == "__main__":
     # 小说名字和作者
     title, author = title_author(url)
     print(title, author)
+
+    txt_folder = f"./小说/{title}"
+    if not os.path.exists(txt_folder):
+        os.mkdir(txt_path)
+        print(f"文件夹 '{txt_path}' 创建成功。")
+    else:
+        print(f"文件夹 '{txt_path}' 已经存在。")
 
     chapters_url_dict = get_urls(url, chapters_url_folder)
     max_workers = 10
