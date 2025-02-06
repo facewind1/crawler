@@ -11,18 +11,20 @@ from create_epub import create_epub
 
 # 初始信息
 chapters_url_folder = "./chapters.csv"
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+}
 
 def content_extract(chapter_url):
     try:
-        with requests.Session() as session:
-            response = session.get(chapter_url)
+        with requests.get(chapter_url, headers=headers) as response:
             response.encoding = "utf-8"
             html_content = response.text
             soup = BeautifulSoup(html_content, 'html.parser')
 
             # 文件内容处理
             content_div = soup.find("div", id="chaptercontent")
-            novel_text = "\n".join(p.get_text() for p in content_div.find_all("p"))
+            novel_text = content_div.get_text(separator="\n", strip=True)
             return novel_text
     except Exception as e:
         print(f"出错：{e}")
