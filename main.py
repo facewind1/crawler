@@ -70,3 +70,4 @@ if __name__ == "__main__":
                 future.result()  # 捕获异常
             except Exception as e:
                 print(f"处理章节时出错: {e}")
+    create_epub(txt_folder, title, author)

@@ -3,7 +3,7 @@ import re
 from ebooklib import epub
 
 # 定义文件夹路径和输出 EPUB 文件名
-def create_epub(input_folder, title, author, picture):
+def create_epub(input_folder, title, author):
     # input_folder  存放章节文件的文件夹
     # output_epub  输出的 EPUB 文件名
     # 创建 EPUB 书籍对象
