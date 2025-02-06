@@ -11,3 +11,5 @@ chapters.csv
 *.epub
 
 epub/
+
+test*

@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def get_urls(url, output_file = "chapters.csv"):
     # 基础URL -> 主网站网址
-    base_url = re.sub(r'\d+/$', '/', url).rstrip('index/')
+    base_url = re.sub(r'\d+/$', '/', url).rstrip('index/').rstrip('book/')
 
     html = get_html(url)
 

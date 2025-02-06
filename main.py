@@ -23,6 +23,9 @@ def content_extract(chapter_url):
             soup = BeautifulSoup(html_content, 'html.parser')
 
             # 文件内容处理
+            # print(chapter_url)
+            # print(response.status_code)
+            #https://www.bqg128.com/book/44949/2.html
             content_div = soup.find("div", id="chaptercontent")
             novel_text = content_div.get_text(separator="\n", strip=True)
             return novel_text
