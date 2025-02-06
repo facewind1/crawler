@@ -62,10 +62,10 @@ if __name__ == "__main__":
 
     txt_folder = f"./小说/{title}"
     if not os.path.exists(txt_folder):
-        os.mkdir(txt_path)
-        print(f"文件夹 '{txt_path}' 创建成功。")
+        os.mkdir(txt_folder)
+        print(f"文件夹 '{txt_folder}' 创建成功。")
     else:
-        print(f"文件夹 '{txt_path}' 已经存在。")
+        print(f"文件夹 '{txt_folder}' 已经存在。")
 
     chapters_url_dict = get_urls(url, chapters_url_folder)
     max_workers = 10
