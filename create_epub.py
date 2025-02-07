@@ -55,7 +55,8 @@ def create_epub(input_folder, title, author):
     book.spine = ["nav"] + chapters
 
     # 保存 EPUB 文件
-    output_epub = f"./epub/{title}.epub"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_epub = os.path.join(script_dir, f"epub/{title}.epub")
     epub.write_epub(output_epub, book, {})
 
     print(f"EPUB 文件已生成：{output_epub}")
